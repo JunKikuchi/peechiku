@@ -1,0 +1,56 @@
+body {
+  margin: auto;
+  width: 640px;
+}
+
+#header {
+  border-bottom: 1px solid #aaa;
+}
+
+#header div {
+  text-align: right;
+  background: #b3ccfe;
+  padding: 5px 10px;
+  border-radius: 0  0 5px 5px;
+}
+
+#header #user {
+  font-weight: bold;
+}
+
+#header #signout {
+  margin: 0 0 0 0.5em;
+}
+
+#content {
+  padding: 5px 10px;
+}
+
+#log {
+  margin: 10px;
+}
+
+#footer {
+  border-top: 1px solid #aaa;
+  padding: 5px 0;
+  text-align: center;
+}
+
+form input#text {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: solid 1px #aaa;
+  width: 80%;
+}
+
+form button#send {
+  margin: 0 0 0 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: solid 1px #aaa;
+  background: #aaa;
+}
+
+form button#send:hover {
+  background: #b3ccfe;
+}
