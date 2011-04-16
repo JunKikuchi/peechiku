@@ -3,6 +3,7 @@
   <application>bonnoudotcom</application>
   <version>20110416</version>
   <static-files>
+    <include path="/favicon.ico" />
     <include path="/static/*" />
   </static-files>
   <resource-files/>
