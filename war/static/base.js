@@ -1,5 +1,6 @@
 $(function() {
   $.getJSON('/token', function(data) {
+    console.log('get token');
     var token = data.token;
     var channel = new goog.appengine.Channel(token);
     var socket = channel.open({
