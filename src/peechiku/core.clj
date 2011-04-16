@@ -32,7 +32,7 @@
       [:div.yui3-g
         [:div#header.yui3-u-1
           [:div
-            [:span#user (if (user-logged-in?) (. (current-user) toString))]
+            [:span#user (. (current-user) toString)]
             [:span#signout [:a {:href (logout-url)} "logout"]]
           ]
           [:h1 "peechiku"]
@@ -60,13 +60,19 @@
     (channel/send (. (current-user) getUserId) message)
     (json-str {:status "OK" :message message})))
 
-(defn auth [fn] (if (user-logged-in?) fn (redirect (login-url))))
+(defroutes private-handler
+  (GET  "/"        []   (index))
+  (GET  "/token"   []   (token))
+  (GET  "/opened"  []   (opened))
+  (POST "/send-message" {params :params} (send-message params)))
 
-(defroutes main-handler
-  (GET  "/"        []   (auth (index)))
-  (GET  "/token"   []   (auth (token)))
-  (GET  "/opened"  []   (auth (opened)))
-  (POST "/send-message" {params :params} (auth (send-message params))))
+(defroutes public-handler
+  (ANY "*" _ (redirect (login-url))))
+
+(defn main-handler [request]
+  (if (user-logged-in?)
+    (private-handler request)
+    (public-handler request)))
 
 (def app
  (-> #'main-handler
