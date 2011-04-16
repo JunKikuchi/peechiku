@@ -10,12 +10,24 @@ $(function() {
         });
       },
       onmessage: function(message) {
-        console.log(message)
-        $('<p>' + message.data + '</p>').prependTo('#log');
+        console.log(message);
+        var data = $.parseJSON(message.data);
+        $(
+          '<p>' +
+            '<span>' + data.user + '</span>' +
+             '&nbsp;&raquo;&nbsp;' +
+             data.message +
+          '</p>'
+        ).prependTo('#log');
         $("form #text").val('');
       },
       onerror: function(error) {
-        console.log('error')
+        console.log(error);
+        $(
+          '<p class="error">' +
+            'ERROR: [' + error.code + ']' + error.description +
+          '</p>'
+        ).prependTo('#log');
       },
       onclose: function() {
         console.log('close')
@@ -23,9 +35,12 @@ $(function() {
     });
 
     $("form").submit(function() {
-      $.post('/send-message', {message: $("form #text").val()}, function(data) {
-        console.log(data);
-      })
+      var message = $("form #text").val();
+      if(message) {
+        $.post('/send-message', {message: message}, function(data) {
+          console.log(data);
+        })
+      }
       return false;
     });
   });

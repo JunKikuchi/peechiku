@@ -54,3 +54,15 @@ form button#send {
 form button#send:hover {
   background: #b3ccfe;
 }
+
+#log p {
+  color: gray;
+}
+
+#log p.error {
+  color: red;
+}
+
+#log span {
+  font-weight: bold;
+}
