@@ -66,7 +66,7 @@
           (json-str {:user name :message message}))
         (catch ChannelFailureException _
           (ds/delete! user)))
-      (send-message-to-users message (next users)))))
+      (recur message (next users)))))
 
 (defn opened []
   (let [user (User. (. (current-user) getUserId))]
